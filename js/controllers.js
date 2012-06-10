@@ -7,19 +7,13 @@ function projectorCtrl($scope) {
 
   $scope.startBalance = '';
 
-  $scope.expenses = [
-    {name:'Rent', amount:2500},
-    {name:'Day Care', amount:1500}
-  ];
+  $scope.expenses = [];
 
-  $scope.incomes = [
-    {name:'Salary', amount:2500},
-    {name:'Your Carry', amount:200}
-  ];
+  $scope.incomes = [];
 
 
   $scope.addExpense = function() {
-    var newEmptyExpense = {name:'', amount:0};
+    var newEmptyExpense = {active:true, name:'', amount:0};
     $scope.expenses.push(newEmptyExpense);
   }
 
@@ -28,7 +22,7 @@ function projectorCtrl($scope) {
   }
 
   $scope.addIncome = function() {
-    var newEmptyIncome = {name:'', amount:0};
+    var newEmptyIncome = {active:true, name:'', amount:0};
     $scope.incomes.push(newEmptyIncome);
   }
 
@@ -40,7 +34,9 @@ function projectorCtrl($scope) {
     var total = 0;
     for (var i = 0; i < $scope.incomes.length; i++) {
       if (parseInt($scope.incomes[i].amount)) {
-        total = total + parseInt($scope.incomes[i].amount);
+        if ($scope.incomes[i].active) {
+          total = total + parseInt($scope.incomes[i].amount);
+        }
       }
     }
     return total;
@@ -50,7 +46,9 @@ function projectorCtrl($scope) {
     var total = 0;
     for (var i = 0; i < $scope.expenses.length; i++) {
       if (parseInt($scope.expenses[i].amount)) {
-        total = total + parseInt($scope.expenses[i].amount);
+        if ($scope.expenses[i].active) {
+          total = total + parseInt($scope.expenses[i].amount);
+        }
       }
     }
     return total;
@@ -67,41 +65,46 @@ function projectorCtrl($scope) {
   $scope.montlyProjection = function() {
 
     var monthByMonth = [];
+    var runningTotal = 0;
 
-    if (parseInt($scope.startBalance)) {
-      monthByMonth[0] = parseInt($scope.startBalance);
-    } else {
-      monthByMonth[0] = 0;
+    for (var i = 0; i < 12; i++) {
+      runningTotal = runningTotal + parseInt($scope.monthlyNet());
+      monthByMonth[i] = runningTotal;
     }
-
-    for (var i = 1; i < 13; i++) {
-      monthByMonth[i] = monthByMonth[i-1] + parseInt($scope.monthlyNet());
-    }
-
+   
     return monthByMonth;
 
   }
 
-
-  $scope.drawChart = function() {
-
-    
-    var monthByMonth = $scope.montlyProjection();
-    var twodmonthByMonth = [];
-    twodmonthByMonth.push(['Month','Balance']);
-
-
-    for (var i = 0; i < monthByMonth.length; i++) {
-      twodmonthByMonth.push([i,monthByMonth[i]]);
+  $scope.getInt = function(value) {
+    if (value) {
+      return parseInt(value);
+    } else {
+      return 0;
     }
-    var data = google.visualization.arrayToDataTable(twodmonthByMonth);
-
-    drawChart(data);
-  
   }
 
+  $scope.getMonthLabel = function(monthAhead) {
 
+    var d = new Date;
+    var currentMonth = d.getMonth() + 1;
+    var monthNames = ['Januar','Februar','March','April','May','June','July','August','September','October','November','December'];
 
+    var futureMonth = currentMonth + monthAhead;
+    if (futureMonth > 11) {
+      futureMonth = futureMonth - 12;
+    }
+    return monthNames[futureMonth];
+  }
+
+  $scope.positiveNegative = function(value) {
+    if (value > 0) {
+      return "positive";
+    }
+    if (value < 0) {
+      return "negative";
+    }
+  }
 
 
 }

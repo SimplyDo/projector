@@ -2,5 +2,43 @@
 
 
 body {
+  padding-top:30px;
+}
 
+h2 {
+  font-size:1.1em;
+  margin-top:1em;
+}
+
+ul {
+  list-style:none;
+  margin:0px;
+  li span {
+    width:15px;
+    display: inline-block;
+  }
+}
+
+button {
+  margin-left:18px;
+}
+
+input {
+  &[type="text"] {
+    vertical-align: 0px;
+  }
+}
+
+table {
+  td {
+    &.number {
+      text-align:right;
+    }
+    &.positive {
+      color:green;
+    }
+    &.negative {
+      color:red;
+    }
+  }
 }

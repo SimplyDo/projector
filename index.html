@@ -8,53 +8,79 @@
 <body>
   <div class="container" ng-controller="projectorCtrl">
     <div class="row">
+      <div class="hero-unit">
+        <h1>Balance Projector</h1>
+        <p>Enter your current balance, you income and your expenses and see into the future!</p>
+      </div>
       <div class="span6">
-        <h2>You Start Balance</h2>
-
-        <input type=t"text" ng-model="startBalance" placeholder="Enter your current balance" />
-
-
-        <h2>{{incomes.length;}} Monthly Incomes</h2>
-        <ul>
-          <li ng-repeat="income in incomes">
-            <input type=t"text" ng-model="income.name" placeholder="Enter Name" class="span3" /> <input type=t"text" ng-model="income.amount" placeholder="Enter Amount" class="span1"/> <button class="btn btn-danger" ng-click="removeIncome($index);">Remove</button>
-          </li>
-        </ul>
-        <button class="btn btn-primary" ng-click="addIncome();">Add Income Item</button>
-
-
-        <h2>{{expenses.length;}} Monthly Expenses</h2>
-        <ul>
-          <li ng-repeat="expense in expenses">
-            <input type=t"text" ng-model="expense.name" placeholder="Enter Name" class="span3" /> <input type="text" ng-model="expense.amount" placeholder="Enter Amount" class="span1" /> <button class="btn btn-danger" ng-click="removeExpense($index);">Remove</button>
-          </li>
-        </ul>
-        <button class="btn btn-primary" ng-click="addExpense();">Add Expense</button>
+        
+        <h2>Monthly Incomes ({{incomes.length;}} )</h2>
+        <div class="well">
+          <ul>
+            <li ng-repeat="income in incomes">
+              <span><input type="checkbox" ng-model="income.active"></span>
+              <input type="text" ng-model="income.name" placeholder="What is it?" class="span3" />
+              <input type="text" ng-model="income.amount" placeholder="Enter Amount" class="span1"/>
+              <a class="" ng-click="removeIncome($index);">delete</a>
+            </li>
+          </ul>
+          <button class="btn btn-primary" ng-click="addIncome();">Add Income</button>
+        </div>
 
 
-        <p>Total Monthly Income: {{monthlyIncome();}}</p>
-        <p>Total Monthly Expense: {{monthlyExpense();}}</p>
-        <p>Total Monthly Net: {{monthlyNet();}}</p>
+        <h2>Monthly Expenses ({{expenses.length;}})</h2>
+        <div class="well">
+          <ul>
+            <li ng-repeat="expense in expenses">
+              <span><input type="checkbox" ng-model="expense.active"></span>
+              <input type="text" ng-model="expense.name" placeholder="What is it?" class="span3" />
+              <input type="text" ng-model="expense.amount" placeholder="Enter Amount" class="span1" />
+              <a class="" ng-click="removeExpense($index);">delete</a>
+            </li>
+          </ul>
+          <button class="btn btn-primary" ng-click="addExpense();">Add Expense</button>
+        </div>
 
-        <!-- 
-          <a class="btn btn-primary" ng-click="drawChart();">Chart</a>
-          <div id="chart_div" style="width: 900px; height: 500px;"></div>
-        -->
-
+        <h2>Monthly Totals</h2>
+        <table class="table table-striped table-bordered">
+          <tbody>
+            <tr>
+              <td>Incomes</td>
+              <td class="number">{{monthlyIncome();}}</td>
+            </tr>
+            <tr>
+              <td>Expenses</td>
+              <td class="number">{{monthlyExpense();}}</td>
+            </tr>
+            <tr>
+              <td><strong>Net</strong></td>
+              <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{monthlyNet();}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
 
       </div>
 
       <div class="span6">
-        <table class="table table-striped">
+
+        <h2>Your Current Balance</h2>
+        <div class="">
+          <input type=t"text" ng-model="startBalance" placeholder="Enter your current balance" />
+        </div>
+
+        <h2>12 Month Projection</h2>
+        <table class="table table-striped table-bordered">
           <thead>
             <tr>
               <th>Month</th>
+              <th>Accumulative</th>
               <th>Balance</th>
           </thead>
           <tbody>
-            <tr ng-repeat="month in montlyProjection()">
-              <td>{{$index}}</td>
-              <td>{{month}}</td>
+            <tr ng-repeat="change in montlyProjection();">
+              <td>{{getMonthLabel($index)}}</td>
+              <td>{{change}}</td>
+              <td class="number" ng-class="positiveNegative(getInt(startBalance) + change)">{{getInt(startBalance) + change}}</td>
             </tr>
           </tbody>
 
@@ -66,33 +92,6 @@
     </div>
   </div>
 
-  <!--
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-
-   <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      //google.setOnLoadCallback(drawChart);
-      function drawChart(data) {
-        /*
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
-        */
-
-        var options = {
-          title: 'Balance over the next 12 month'
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-  -->
 
 
   <script src="lib/angular/angular.js"></script>
