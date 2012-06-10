@@ -62,8 +62,29 @@
           <button class="btn btn-primary" ng-click="addExpense();">Add Expense</button>
         </div>
 
-        <button class="btn btn-success" ng-click="save();">Save locally</button>
-        <button class="btn btn-danger" ng-click="clear();">Reset</button>
+        <h2>Non-Recurring Transactions</h2>
+        <div class="well">
+          <ul>
+            <li ng-repeat="transaction in nonRecurring">
+              <span><input type="checkbox" ng-model="transaction.active"></span>
+              <input type="text" ng-model="transaction.name" placeholder="What is it?" class="span3" />
+              <input type="text" ng-model="transaction.amount" placeholder="Enter Amount" class="span1" />
+              <select class="span2" ng-model='transaction.month'>
+                <option ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,12]" value="{{i}}">{{getMonthLabel(i)}}</option>
+              </select>
+              <a class="" ng-click="removeTransaction($index);">delete</a>
+            </li>
+          </ul>
+          <button class="btn btn-primary" ng-click="addTransaction();">Add Transaction</button>
+        </div>
+
+        <div>
+          <p>
+          <button class="btn btn-success" ng-click="save();">Save locally</button>
+          <button class="btn btn-danger" ng-click="clear();">Erase</button>
+          </p>
+          <p>Important: You data is stored locally and will only be available in this browser on this device.</p>
+        </div>
 
       </div>
 
@@ -79,28 +100,42 @@
           </thead>
           <tbody>
             <tr ng-repeat="change in montlyProjection();">
-              <td>{{getMonthLabel($index)}}</td>
-              <td>{{roundDown(change)}}</td>
+              <td>{{getMonthLabel($index+1)}}</td>
+              <td class="number">{{roundDown(change)}}</td>
               <td class="number" ng-class="positiveNegative(convertToNumber(startBalance) + change)">{{roundDown(convertToNumber(startBalance) + change)}}</td>
             </tr>
           </tbody>
         </table>
 
 
-        <h2>Monthly Totals</h2>
+        <h2>Totals</h2>
         <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th>per Month</th>
+              <th>per Year</th>
+          </thead>
           <tbody>
             <tr>
-              <td>Incomes</td>
+              <td>Income</td>
               <td class="number">{{roundDown(monthlyIncome())}}</td>
+              <td class="number">{{roundDown(monthlyIncome()*12)}}</td>
             </tr>
             <tr>
               <td>Expenses</td>
               <td class="number">{{roundDown(monthlyExpense())}}</td>
+              <td class="number">{{roundDown(monthlyExpense()*12)}}</td>
+            </tr>
+            <tr>
+              <td>Non-Recurring</td>
+              <td class="number">n/a</td>
+              <td class="number">{{tallyTransactions()}}</td>
             </tr>
             <tr>
               <td><strong>Net</strong></td>
               <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{roundDown(monthlyNet())}}</strong></td>
+              <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{roundDown(monthlyNet()*12)+tallyTransactions()}}</strong></td>
             </tr>
           </tbody>
         </table>

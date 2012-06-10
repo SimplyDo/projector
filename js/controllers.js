@@ -11,11 +11,14 @@ function projectorCtrl($scope,Storage) {
 
   $scope.incomes = Storage.loadObject('incomes');
 
+  $scope.nonRecurring = Storage.loadObject('nonRecurring');
+
 
   $scope.save = function() {
     Storage.saveObject($scope.expenses,'expenses');
     Storage.saveObject($scope.incomes,'incomes');
     Storage.saveObject($scope.startBalance,'startBalance');
+    Storage.saveObject($scope.nonRecurring,'nonRecurring');
   }
 
   $scope.clear = function() {
@@ -23,6 +26,7 @@ function projectorCtrl($scope,Storage) {
     $scope.startBalance = [];
     $scope.expenses = [];
     $scope.incomes = [];
+    $scope.nonRecurring = [];
   }
 
   $scope.addExpense = function() {
@@ -41,6 +45,32 @@ function projectorCtrl($scope,Storage) {
 
   $scope.removeIncome = function(index) {
     $scope.incomes.splice(index,1);
+  }
+
+  $scope.addTransaction = function() {
+    var newEmptyTransaction = {active:true, name:'', amount:0, month:1};
+    $scope.nonRecurring.push(newEmptyTransaction);
+  }
+
+  $scope.removeTransaction = function(index) {
+    $scope.nonRecurring.splice(index,1);
+  }
+
+  $scope.tallyTransactions = function() {
+
+    var total = 0;
+    var oneOff = 0;
+
+    for (var m = 0; m < $scope.nonRecurring.length; m++) {
+      oneOff = $scope.convertToNumber($scope.nonRecurring[m].amount);
+      if (oneOff != 0) {
+        if ($scope.nonRecurring[m].active) {
+          total = total + oneOff;
+        }
+      }
+    }
+
+    return total;
   }
 
   $scope.monthlyIncome = function() {
@@ -83,9 +113,23 @@ function projectorCtrl($scope,Storage) {
 
     var monthByMonth = [];
     var runningTotal = 0;
+    var oneOff = 0;
 
     for (var i = 0; i < 12; i++) {
       runningTotal = runningTotal + $scope.monthlyNet();
+
+      // add applicable one-off transations
+      for (var m = 0; m < $scope.nonRecurring.length; m++) {
+        if ($scope.convertToNumber($scope.nonRecurring[m].month) == i+1) {
+          oneOff = $scope.convertToNumber($scope.nonRecurring[m].amount);
+          if (oneOff != 0) {
+            if ($scope.nonRecurring[m].active) {
+              runningTotal = runningTotal + oneOff;
+            }
+          }
+        }
+      }
+
       monthByMonth[i] = runningTotal;
     }
    
@@ -96,7 +140,7 @@ function projectorCtrl($scope,Storage) {
   $scope.getMonthLabel = function(monthAhead) {
 
     var d = new Date;
-    var currentMonth = d.getMonth() + 1;
+    var currentMonth = d.getMonth();
     var monthNames = ['Januar','Februar','March','April','May','June','July','August','September','October','November','December'];
 
     var futureMonth = currentMonth + monthAhead;
