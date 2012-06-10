@@ -3,17 +3,24 @@
 /* Controllers */
 
 
-function projectorCtrl($scope) {
+function projectorCtrl($scope,Storage) {
 
-  $scope.startBalance = '';
+  $scope.startBalance = Storage.loadObject('startBalance');
 
-  $scope.expenses = [];
+  $scope.expenses = Storage.loadObject('expenses');
 
-  $scope.incomes = [];
+  $scope.incomes = Storage.loadObject('incomes');
 
+
+  $scope.save = function() {
+    alert('saved locally');
+    Storage.saveObject($scope.expenses,'expenses');
+    Storage.saveObject($scope.incomes,'incomes');
+    Storage.saveObject($scope.startBalance,'startBalance');
+  }
 
   $scope.addExpense = function() {
-    var newEmptyExpense = {active:true, name:'', amount:0};
+    var newEmptyExpense = {active:true, name:'', amount:0, frequency:1};
     $scope.expenses.push(newEmptyExpense);
   }
 
@@ -22,7 +29,7 @@ function projectorCtrl($scope) {
   }
 
   $scope.addIncome = function() {
-    var newEmptyIncome = {active:true, name:'', amount:0};
+    var newEmptyIncome = {active:true, name:'', amount:0, frequency:1};
     $scope.incomes.push(newEmptyIncome);
   }
 
@@ -35,11 +42,11 @@ function projectorCtrl($scope) {
     for (var i = 0; i < $scope.incomes.length; i++) {
       if (parseInt($scope.incomes[i].amount)) {
         if ($scope.incomes[i].active) {
-          total = total + parseInt($scope.incomes[i].amount);
+          total = total + (parseInt($scope.incomes[i].amount)*parseFloat($scope.incomes[i].frequency));
         }
       }
     }
-    return total;
+    return Math.round(total);
   }
 
   $scope.monthlyExpense = function() {
@@ -47,11 +54,11 @@ function projectorCtrl($scope) {
     for (var i = 0; i < $scope.expenses.length; i++) {
       if (parseInt($scope.expenses[i].amount)) {
         if ($scope.expenses[i].active) {
-          total = total + parseInt($scope.expenses[i].amount);
+          total = total + (parseInt($scope.expenses[i].amount)*parseFloat($scope.expenses[i].frequency));;
         }
       }
     }
-    return total;
+    return Math.round(total);
   }
 
   $scope.monthlyNet = function() {
