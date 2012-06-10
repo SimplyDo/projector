@@ -45,26 +45,30 @@ function projectorCtrl($scope,Storage) {
 
   $scope.monthlyIncome = function() {
     var total = 0;
+    var thisMonth;
     for (var i = 0; i < $scope.incomes.length; i++) {
-      if (parseInt($scope.incomes[i].amount)) {
+      thisMonth = $scope.convertToNumber($scope.incomes[i].amount);
+      if (thisMonth != 0) {
         if ($scope.incomes[i].active) {
-          total = total + (parseInt($scope.incomes[i].amount)*parseFloat($scope.incomes[i].frequency));
+          total = total + (thisMonth * $scope.incomes[i].frequency);
         }
       }
     }
-    return Math.round(total);
+    return total;
   }
 
   $scope.monthlyExpense = function() {
     var total = 0;
+    var thisMonth;
     for (var i = 0; i < $scope.expenses.length; i++) {
-      if (parseInt($scope.expenses[i].amount)) {
+      thisMonth = $scope.convertToNumber($scope.expenses[i].amount);
+      if (thisMonth != 0) {
         if ($scope.expenses[i].active) {
-          total = total + (parseInt($scope.expenses[i].amount)*parseFloat($scope.expenses[i].frequency));;
+          total = total + (thisMonth*$scope.expenses[i].frequency);
         }
       }
     }
-    return Math.round(total);
+    return total;
   }
 
   $scope.monthlyNet = function() {
@@ -81,22 +85,12 @@ function projectorCtrl($scope,Storage) {
     var runningTotal = 0;
 
     for (var i = 0; i < 12; i++) {
-      runningTotal = runningTotal + parseInt($scope.monthlyNet());
+      runningTotal = runningTotal + $scope.monthlyNet();
       monthByMonth[i] = runningTotal;
     }
    
     return monthByMonth;
 
-  }
-
-  $scope.getInt = function(value) {
-
-    var inValue = parseInt(value);
-    if (inValue) {
-      return inValue;
-    } else {
-      return 0;
-    }
   }
 
   $scope.getMonthLabel = function(monthAhead) {
@@ -120,6 +114,32 @@ function projectorCtrl($scope,Storage) {
       return "negative";
     }
   }
+
+
+  $scope.convertToNumber = function(value) {
+    
+    var floatNumber = parseFloat(value);
+
+    if (floatNumber) {
+
+      return floatNumber;
+
+    } else {
+
+     return 0;
+
+    }
+
+  }
+
+  $scope.roundDown = function(number) {
+    
+    //return Math.round(number*100)/100;
+    return Math.round(number);
+
+  }
+
+  //
 
 
 }

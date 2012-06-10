@@ -29,10 +29,10 @@
               <input type="text" ng-model="income.name" placeholder="What is it?" class="span3" />
               <input type="text" ng-model="income.amount" placeholder="Enter Amount" class="span1"/>
               <select class="span2" ng-model='income.frequency'>
-                <option value="30.42">daily</option>
-                <option value="21.67">work days</option>
-                <option value="4.34">weekly</option>
-                <option value="2.17">every 2 weeks</option>
+                <option value="30.4166666666667">daily</option>
+                <option value="21.6666666666667">work days</option>
+                <option value="4.33333333333333">weekly</option>
+                <option value="2.16666666666667">every 2 weeks</option>
                 <option value="1">monthly</option>
               </select>
               <a class="" ng-click="removeIncome($index);">delete</a>
@@ -50,10 +50,10 @@
               <input type="text" ng-model="expense.name" placeholder="What is it?" class="span3" />
               <input type="text" ng-model="expense.amount" placeholder="Enter Amount" class="span1" />
               <select class="span2" ng-model='expense.frequency'>
-                <option value="30.42">daily</option>
-                <option value="21.67">business daily</option>
-                <option value="4.34">weekly</option>
-                <option value="2.17">every 2 weeks</option>
+                <option value="30.4166666666667">daily</option>
+                <option value="21.6666666666667">business daily</option>
+                <option value="4.33333333333333">weekly</option>
+                <option value="2.16666666666667">every 2 weeks</option>
                 <option value="1">monthly</option>
               </select>
               <a class="" ng-click="removeExpense($index);">delete</a>
@@ -80,8 +80,8 @@
           <tbody>
             <tr ng-repeat="change in montlyProjection();">
               <td>{{getMonthLabel($index)}}</td>
-              <td>{{change}}</td>
-              <td class="number" ng-class="positiveNegative(getInt(startBalance) + change)">{{getInt(startBalance) + change}}</td>
+              <td>{{roundDown(change)}}</td>
+              <td class="number" ng-class="positiveNegative(convertToNumber(startBalance) + change)">{{roundDown(convertToNumber(startBalance) + change)}}</td>
             </tr>
           </tbody>
         </table>
@@ -92,15 +92,15 @@
           <tbody>
             <tr>
               <td>Incomes</td>
-              <td class="number">{{monthlyIncome();}}</td>
+              <td class="number">{{roundDown(monthlyIncome())}}</td>
             </tr>
             <tr>
               <td>Expenses</td>
-              <td class="number">{{monthlyExpense();}}</td>
+              <td class="number">{{roundDown(monthlyExpense())}}</td>
             </tr>
             <tr>
               <td><strong>Net</strong></td>
-              <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{monthlyNet();}}</strong></td>
+              <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{roundDown(monthlyNet())}}</strong></td>
             </tr>
           </tbody>
         </table>
