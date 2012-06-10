@@ -50,13 +50,13 @@
               <input type="text" ng-model="expense.name" placeholder="What is it?" class="span3" />
               <input type="text" ng-model="expense.amount" placeholder="Enter Amount" class="span1" />
               <select class="span2" ng-model='expense.frequency'>
-                <option value="30.4166666666667">daily</option>
-                <option value="21.6666666666667">business daily</option>
-                <option value="4.33333333333333">weekly</option>
-                <option value="2.16666666666667">every 2 weeks</option>
-                <option value="1">monthly</option>
+                <option value="30.4166666666667">Daily</option>
+                <option value="21.6666666666667">Business Daily</option>
+                <option value="4.33333333333333">Weekly</option>
+                <option value="2.16666666666667">Every 2 Weeks</option>
+                <option value="1">Monthly</option>
               </select>
-              <a class="" ng-click="removeExpense($index);">delete</a>
+              <a class="" ng-click="removeExpense($index);">Delete</a>
             </li>
           </ul>
           <button class="btn btn-primary" ng-click="addExpense();">Add Expense</button>
@@ -70,7 +70,18 @@
               <input type="text" ng-model="transaction.name" placeholder="What is it?" class="span3" />
               <input type="text" ng-model="transaction.amount" placeholder="Enter Amount" class="span1" />
               <select class="span2" ng-model='transaction.month'>
-                <option ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,12]" value="{{i}}">{{getMonthLabel(i)}}</option>
+                <option value="1">{{getMonthLabel(1)}}</option>
+                <option value="2">{{getMonthLabel(2)}}</option>
+                <option value="3">{{getMonthLabel(3)}}</option>
+                <option value="4">{{getMonthLabel(4)}}</option>
+                <option value="5">{{getMonthLabel(5)}}</option>
+                <option value="6">{{getMonthLabel(6)}}</option>
+                <option value="7">{{getMonthLabel(7)}}</option>
+                <option value="8">{{getMonthLabel(8)}}</option>
+                <option value="9">{{getMonthLabel(9)}}</option>
+                <option value="10">{{getMonthLabel(10)}}</option>
+                <option value="11">{{getMonthLabel(11)}}</option>
+                <option value="12">{{getMonthLabel(12)}}</option>
               </select>
               <a class="" ng-click="removeTransaction($index);">delete</a>
             </li>
@@ -113,8 +124,8 @@
           <thead>
             <tr>
               <th></th>
-              <th>per Month</th>
-              <th>per Year</th>
+              <th>Monthly</th>
+              <th>Yearly</th>
           </thead>
           <tbody>
             <tr>
