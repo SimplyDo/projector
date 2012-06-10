@@ -31,7 +31,7 @@
               <select class="span2" ng-model='income.frequency'>
                 <option value="30.42">daily</option>
                 <option value="21.67">work days</option>
-                <option value="4.43">weekly</option>
+                <option value="4.34">weekly</option>
                 <option value="2.17">every 2 weeks</option>
                 <option value="1">monthly</option>
               </select>
@@ -52,7 +52,7 @@
               <select class="span2" ng-model='expense.frequency'>
                 <option value="30.42">daily</option>
                 <option value="21.67">business daily</option>
-                <option value="4.43">weekly</option>
+                <option value="4.34">weekly</option>
                 <option value="2.17">every 2 weeks</option>
                 <option value="1">monthly</option>
               </select>
@@ -62,7 +62,8 @@
           <button class="btn btn-primary" ng-click="addExpense();">Add Expense</button>
         </div>
 
-        <button class="btn btn-primary" ng-click="save();">Save</button>
+        <button class="btn btn-success" ng-click="save();">Save locally</button>
+        <button class="btn btn-danger" ng-click="clear();">Reset</button>
 
       </div>
 

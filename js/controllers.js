@@ -13,10 +13,16 @@ function projectorCtrl($scope,Storage) {
 
 
   $scope.save = function() {
-    alert('saved locally');
     Storage.saveObject($scope.expenses,'expenses');
     Storage.saveObject($scope.incomes,'incomes');
     Storage.saveObject($scope.startBalance,'startBalance');
+  }
+
+  $scope.clear = function() {
+    Storage.clear();
+    $scope.startBalance = [];
+    $scope.expenses = [];
+    $scope.incomes = [];
   }
 
   $scope.addExpense = function() {
@@ -84,8 +90,10 @@ function projectorCtrl($scope,Storage) {
   }
 
   $scope.getInt = function(value) {
-    if (value) {
-      return parseInt(value);
+
+    var inValue = parseInt(value);
+    if (inValue) {
+      return inValue;
     } else {
       return 0;
     }

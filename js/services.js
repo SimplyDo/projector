@@ -30,6 +30,12 @@ servicesModule.factory('Storage', function() {
         }
         return data;
     };
+
+    newServiceInstance.clear = function() {
+
+      localStorage.clear();
+      
+    };
     
     newServiceInstance.saveObject = function(objectToSave,key) {
 
