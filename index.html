@@ -13,8 +13,13 @@
         <p>Enter your current balance, you income and your expenses and see into the future!</p>
       </div>
       <div class="span6">
+
+        <h2>Your Current Balance</h2>
+        <div class="well">
+          <input type=t"text" ng-model="startBalance" placeholder="Enter your current balance" />
+        </div>
         
-        <h2>Monthly Incomes ({{incomes.length;}} )</h2>
+        <h2>Your Monthly Incomes</h2>
         <div class="well">
           <ul>
             <li ng-repeat="income in incomes">
@@ -28,7 +33,7 @@
         </div>
 
 
-        <h2>Monthly Expenses ({{expenses.length;}})</h2>
+        <h2>Your Monthly Expenses</h2>
         <div class="well">
           <ul>
             <li ng-repeat="expense in expenses">
@@ -62,11 +67,6 @@
       </div>
 
       <div class="span6">
-
-        <h2>Your Current Balance</h2>
-        <div class="">
-          <input type=t"text" ng-model="startBalance" placeholder="Enter your current balance" />
-        </div>
 
         <h2>12 Month Projection</h2>
         <table class="table table-striped table-bordered">
