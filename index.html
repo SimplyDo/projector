@@ -6,14 +6,94 @@
   <link rel="stylesheet" href="css/default.css"/>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
+  <div class="container" ng-controller="projectorCtrl">
+    <div class="row">
+      <div class="span6">
+        <h2>You Start Balance</h2>
 
-  <div ng-view></div>
+        <input type=t"text" ng-model="startBalance" placeholder="Enter your current balance" />
 
-  <div>Angular seed app: v<span app-version></span></div>
+
+        <h2>{{incomes.length;}} Monthly Incomes</h2>
+        <ul>
+          <li ng-repeat="income in incomes">
+            <input type=t"text" ng-model="income.name" placeholder="Enter Name" class="span3" /> <input type=t"text" ng-model="income.amount" placeholder="Enter Amount" class="span1"/> <button class="btn btn-danger" ng-click="removeIncome($index);">Remove</button>
+          </li>
+        </ul>
+        <button class="btn btn-primary" ng-click="addIncome();">Add Income Item</button>
+
+
+        <h2>{{expenses.length;}} Monthly Expenses</h2>
+        <ul>
+          <li ng-repeat="expense in expenses">
+            <input type=t"text" ng-model="expense.name" placeholder="Enter Name" class="span3" /> <input type="text" ng-model="expense.amount" placeholder="Enter Amount" class="span1" /> <button class="btn btn-danger" ng-click="removeExpense($index);">Remove</button>
+          </li>
+        </ul>
+        <button class="btn btn-primary" ng-click="addExpense();">Add Expense</button>
+
+
+        <p>Total Monthly Income: {{monthlyIncome();}}</p>
+        <p>Total Monthly Expense: {{monthlyExpense();}}</p>
+        <p>Total Monthly Net: {{monthlyNet();}}</p>
+
+        <!-- 
+          <a class="btn btn-primary" ng-click="drawChart();">Chart</a>
+          <div id="chart_div" style="width: 900px; height: 500px;"></div>
+        -->
+
+
+      </div>
+
+      <div class="span6">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Balance</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="month in montlyProjection()">
+              <td>{{$index}}</td>
+              <td>{{month}}</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <!--
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+   <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      //google.setOnLoadCallback(drawChart);
+      function drawChart(data) {
+        /*
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+        */
+
+        var options = {
+          title: 'Balance over the next 12 month'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  -->
+
 
   <script src="lib/angular/angular.js"></script>
   <script src="js/app.js"></script>
@@ -21,5 +101,9 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+
+  
+
+
 </body>
 </html>
