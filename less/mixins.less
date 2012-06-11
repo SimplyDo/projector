@@ -1,0 +1,67 @@
+// mixins
+
+
+.backgroundSize(@horizontal, @vertical) {
+	// used by the backgorund tiles in .tile
+	-moz-background-size: @horizontal @vertical;  
+	-o-background-size: @horizontal @vertical;  
+	-webkit-background-size: @horizontal @vertical;   
+	background-size: @horizontal @vertical; 
+}
+
+
+.transition(@property) {
+	transition-property: @property;
+	transition-timing-function: linear;
+	-moz-transition-property: @property;
+	-moz-transition-timing-function: linear;
+	-webkit-transition-property: @property;
+	-webkit-transition-timing-function: linear;
+	-o-transition-property: @property;
+	-o-transition-timing-function: linear;
+}
+
+
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.box-shadow(@vOffset, @hOffset, @blur, @color) {
+	-moz-box-shadow: @vOffset @hOffset @blur @color;
+	-webkit-box-shadow: @vOffset @hOffset @blur @color;
+	box-shadow: @vOffset @hOffset @blur @color;
+}
+
+.text-shadow(@vOffset, @hOffset, @blur, @color) {
+	-moz-text-shadow: @vOffset @hOffset @blur @color;
+	-webkit-text-shadow: @vOffset @hOffset @blur @color;
+	text-shadow: @vOffset @hOffset @blur @color;
+}
+
+.rotate(@angle) {
+	transform:rotate(@angle);
+	-ms-transform:rotate(@angle); /* IE 9 */
+	-moz-transform:rotate(@angle); /* Firefox */
+	-webkit-transform:rotate(@angle); /* Safari and Chrome */
+	-o-transform:rotate(@angle); /* Opera */
+}
+
+.gradient(@colourTop: rgb(255,255,255),@colourBottom: rgb(0,0,0)) {
+	background-image: linear-gradient(bottom, @colourBottom 0%, @colourTop 100%);
+	background-image: -o-linear-gradient(bottom, @colourBottom 0%, @colourTop 100%);
+	background-image: -moz-linear-gradient(bottom, @colourBottom 0%, @colourTop 100%);
+	background-image: -webkit-linear-gradient(bottom, @colourBottom 0%, @colourTop 100%);
+	background-image: -ms-linear-gradient(bottom, @colourBottom 0%, @colourTop 100%);
+}
+
+.noSelection() {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+

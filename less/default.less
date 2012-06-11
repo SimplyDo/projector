@@ -1,13 +1,16 @@
 @import "../bootstrap/less/bootstrap";
-
+@import "mixins.less";
+@import "simplyDoBanner.less";
+@iconSpritePath: "../bootstrap/img/glyphicons-halflings.png";
+@iconWhiteSpritePath: "../bootstrap/img/glyphicons-halflings-white.png";
 
 body {
-  padding-top:30px;
+  padding-top:50px;
 }
 
 h2 {
   font-size:1.1em;
-  margin-top:1em;
+  margin:0px 0px 0.5em 0px;
 }
 
 ul {
@@ -34,7 +37,7 @@ select {
 }
 
 table {
-  td {
+  td, th {
     &.number {
       text-align:right;
     }
@@ -44,5 +47,23 @@ table {
     &.negative {
       color:red;
     }
+  }
+}
+
+
+.box {
+  padding:10px 20px 20px 20px;
+  background-color:#FAFFDC;
+  .rounded-corners(2px);
+  .box-shadow(0px, 2px, 2px, rgba(0,0,0,0.3));
+  margin-bottom:20px;
+}
+
+
+.store {
+  margin-top:2em;
+  text-align:center;
+  p {
+    color:#999;
   }
 }

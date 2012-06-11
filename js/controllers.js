@@ -183,7 +183,9 @@ function projectorCtrl($scope,Storage) {
 
   }
 
-  //
+  if ($scope.incomes.length < 1) {
+    $scope.addIncome();
+  }
 
 
 }
