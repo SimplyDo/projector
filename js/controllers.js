@@ -141,13 +141,15 @@ function projectorCtrl($scope,Storage) {
 
     var d = new Date;
     var currentMonth = d.getMonth();
+    var year = d.getFullYear();
     var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
     var futureMonth = currentMonth + monthAhead;
     if (futureMonth > 11) {
       futureMonth = futureMonth - 12;
+      year = year + 1;
     }
-    return monthNames[futureMonth];
+    return monthNames[futureMonth] + ' ' + year;
   }
 
   $scope.positiveNegative = function(value) {
