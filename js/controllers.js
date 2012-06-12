@@ -27,6 +27,7 @@ function projectorCtrl($scope,Storage) {
     $scope.expenses = [];
     $scope.incomes = [];
     $scope.nonRecurring = [];
+    $scope.initForm();
   }
 
   $scope.addExpense = function() {
@@ -185,9 +186,19 @@ function projectorCtrl($scope,Storage) {
 
   }
 
-  if ($scope.incomes.length < 1) {
-    $scope.addIncome();
+  $scope.initForm = function() {
+    if ($scope.incomes.length < 1) {
+      $scope.addIncome();
+    }
+    if ($scope.expenses.length < 1) {
+      $scope.addExpense();
+    }
+    if ($scope.nonRecurring.length < 1) {
+      $scope.addTransaction();
+    }
   }
+
+  $scope.initForm();
 
 
 }

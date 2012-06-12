@@ -7,30 +7,35 @@
 </head>
 <body>
   <div id="simplyDoBanner">Balance Projector is a <a href="http://simplydo.com" target="new">Simply Do</a> project. <a href="#" target="new">Learn more...</a></div>
-  <div class="container" ng-controller="projectorCtrl">
-
-    <div class="row">
-      <div class="span12">
-        <div class="hero-unit">
+  
+  <div id="top">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
           <h1>Balance Projector</h1>
-          <p>A real time personal finance projector. Find out what your financial future holds.</p>
+          <p>A <strong>real time</strong> personal finance projector.</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="container" ng-controller="projectorCtrl">
+    <div class="row">
       <div class="span7">
 
         
         <div class="box">
-          <h2>Your Current Balance</h2>
+          <h2>How much money do you have today?</h2>
           <input type="text" ng-model="startBalance" placeholder="Enter your current balance" />
         </div>
         
         
         <div class="box">
-          <h2>Your Income</h2>
+          <h2>What is your regular income?</h2>
           <ul>
-            <li ng-repeat="income in incomes">
+            <li ng-repeat="income in incomes" class="active-{{income.active}}">
               <span><input type="checkbox" ng-model="income.active"></span>
-              <input type="text" ng-model="income.name" placeholder="What is it?" class="span3" />
+              <input type="text" ng-model="income.name" placeholder="What is it? e.g. Salary..." class="span3" />
               <input type="text" ng-model="income.amount" placeholder="Enter Amount" class="span1"/>
               <select class="span2" ng-model='income.frequency'>
                 <option value="30.4166666666667">daily</option>
@@ -42,17 +47,17 @@
               <a class="" ng-click="removeIncome($index);"><i class="icon-minus-sign"></i></a>
             </li>
           </ul>
-          <button class="btn btn-primary" ng-click="addIncome();"><i class="icon-plus icon-white"></i> Add</button>
+          <button class="btn btn-indented" ng-click="addIncome();"><i class="icon-plus"></i> Add</button>
         </div>
 
 
         
         <div class="box">
-          <h2>Your Expenses</h2>
+          <h2>What are your regular Expenses?</h2>
           <ul>
-            <li ng-repeat="expense in expenses">
+            <li ng-repeat="expense in expenses" class="active-{{expense.active}}">
               <span><input type="checkbox" ng-model="expense.active"></span>
-              <input type="text" ng-model="expense.name" placeholder="What is it?" class="span3" />
+              <input type="text" ng-model="expense.name" placeholder="e.g. Rent..." class="span3" />
               <input type="text" ng-model="expense.amount" placeholder="Enter Amount" class="span1" />
               <select class="span2" ng-model='expense.frequency'>
                 <option value="30.4166666666667">Daily</option>
@@ -64,16 +69,16 @@
               <a class="" ng-click="removeExpense($index);"><i class="icon-minus-sign"></i></a>
             </li>
           </ul>
-          <button class="btn btn-primary" ng-click="addExpense();"><i class="icon-plus icon-white"></i> Add</button>
+          <button class="btn btn-indented" ng-click="addExpense();"><i class="icon-plus"></i> Add</button>
         </div>
 
         
         <div class="box">
-          <h2>Non-Recurring Transactions</h2>
+          <h2>Any non-Recurring Transactions?</h2>
           <ul>
-            <li ng-repeat="transaction in nonRecurring">
+            <li ng-repeat="transaction in nonRecurring" class="active-{{transaction.active}}">
               <span><input type="checkbox" ng-model="transaction.active"></span>
-              <input type="text" ng-model="transaction.name" placeholder="What is it?" class="span3" />
+              <input type="text" ng-model="transaction.name" placeholder="e.g. Bonus..." class="span3" />
               <input type="text" ng-model="transaction.amount" placeholder="Enter Amount" class="span1" />
               <select class="span2" ng-model='transaction.month'>
                 <option value="1">{{getMonthLabel(1)}}</option>
@@ -92,7 +97,7 @@
               <a class="" ng-click="removeTransaction($index);"><i class="icon-minus-sign"></i></a>
             </li>
           </ul>
-          <button class="btn btn-primary" ng-click="addTransaction();"><i class="icon-plus icon-white"></i> Add</button>
+          <button class="btn btn-indented" ng-click="addTransaction();"><i class="icon-plus"></i> Add</button>
         </div>
 
         <div class="store">
@@ -107,11 +112,10 @@
 
       <div class="span5">
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th></th>
-              <th class="number">Accumulated<br />Net Income</th>
+              <th colspan="2" class="number">Accumulated Net Income</th>
               <th class="number">Balance</th>
           </thead>
           <tbody>
@@ -123,14 +127,12 @@
           </tbody>
         </table>
 
-
-        <h2>Totals</h2>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th></th>
-              <th class="number">Monthly</th>
-              <th class="number">Yearly</th>
+              <th class="number">Per month</th>
+              <th class="number">Per Year</th>
           </thead>
           <tbody>
             <tr>
@@ -145,13 +147,13 @@
             </tr>
             <tr>
               <td>Non-Recurring</td>
-              <td class="number">-</td>
+              <td class="number"></td>
               <td class="number">{{tallyTransactions()}}</td>
             </tr>
             <tr>
               <td><strong>Net Income</strong></td>
               <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{roundDown(monthlyNet())}}</strong></td>
-              <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{roundDown(monthlyNet()*12)+tallyTransactions()}}</strong></td>
+              <td class="number" ng-class="positiveNegative((monthlyNet()*12)+tallyTransactions())"><strong>{{roundDown(monthlyNet()*12)+tallyTransactions()}}</strong></td>
             </tr>
           </tbody>
         </table>
@@ -170,14 +172,17 @@
             <p>© 2012 <a href="http://simplydo.com" target="new">Simply Do</a>, LLC.<br />All Rights Reserved.</p>
           </div>
           <div class="span4">
-            <p>Inspired by an iOS application by <a href="http://twitter.com/#!/thejohnny" target="new">@theJohnny</a></p>
+            <ul class="unstyled">
+              <li>Follow <a href="http://twitter.com/#!/SimplyDoThat" target="new">@SimplyDoThat</a> on Twitter</li>
+              <li>Inspired by an iOS application by <a href="http://twitter.com/#!/thejohnny" target="new">@theJohnny</a></li>
+            </ul>
           </div>
           <div class="span4">
             <ul class="unstyled">
               <li>The source code is open and <a href="https://github.com/SimplyDo/projector" target="new">available on Github</a></li>
               <li>Created with <a href="http://angularjs.org/" target="new">AngularJS</a> by Google</li>
               <li>The UI is <a href="http://twitter.github.com/bootstrap/" target="new">Twitter Bootstrapped</a></li>
-              <li>Hosted for free using <a href="http://pages.github.com/" target="new">Github pages</a></li>
+              <li>Hosted with <a href="http://pages.github.com/" target="new">Github pages</a></li>
 
             </ul>
           </div>
