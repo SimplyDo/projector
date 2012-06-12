@@ -711,17 +711,16 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .hide{display:none;}
 .show{display:block;}
 .invisible{visibility:hidden;}
-#simplyDoBanner{position:absolute;top:0px;left:0px;width:100%;text-align:center;line-height:28px;height:30px;background-color:#FE0;font-weight:bold;-moz-box-shadow:0px 3px 2px rgba(0, 0, 0, 0.5);-webkit-box-shadow:0px 3px 2px rgba(0, 0, 0, 0.5);box-shadow:0px 3px 2px rgba(0, 0, 0, 0.5);z-index:1;-moz-text-shadow:0 1px 0 #ffeeee;-webkit-text-shadow:0 1px 0 #ffeeee;text-shadow:0 1px 0 #ffeeee;background-image:linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-o-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-moz-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-webkit-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-ms-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);}
-#simplyDoBanner:before{content:"";position:absolute;left:0px;top:0px;right:0px;z-index:-1;bottom:2px;border-bottom:1px dashed #333;}
-#simplyDoBanner:after{content:"";position:absolute;left:0px;top:0px;right:0px;z-index:-2;bottom:1px;border-bottom:1px dashed #FFF;}
-body{padding-top:50px;}
+#simplyDoBanner{position:absolute;top:0px;left:0px;width:100%;text-align:center;line-height:40px;height:40px;font-size:1.1em;background-color:#FE0;font-weight:bold;-moz-box-shadow:0px 3px 1px rgba(0, 0, 0, 0.2);-webkit-box-shadow:0px 3px 1px rgba(0, 0, 0, 0.2);box-shadow:0px 3px 1px rgba(0, 0, 0, 0.2);z-index:1;-moz-text-shadow:0 1px 0 #ffeeee;-webkit-text-shadow:0 1px 0 #ffeeee;text-shadow:0 1px 0 #ffeeee;background-image:linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-o-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-moz-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-webkit-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);background-image:-ms-linear-gradient(bottom, #ebe100 0%, #ffff00 100%);border-bottom:1px solid #666;}
+body{padding-top:60px;}
 h2{font-size:1.1em;margin:0px 0px 0.5em 0px;}
 ul{list-style:none;margin:0px;}ul li span{width:15px;display:inline-block;}
 button.btn-primary{margin-left:18px;}
 input[type="text"]{vertical-align:0px;}
 select{vertical-align:0px;}
-table td.number,table th.number{text-align:right;}
+table{font-size:1.1em;}table td.number,table th.number{text-align:right;}
 table td.positive,table th.positive{color:green;}
 table td.negative,table th.negative{color:red;}
 .box{padding:10px 20px 20px 20px;background-color:#FAFFDC;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;-moz-box-shadow:0px 2px 2px rgba(0, 0, 0, 0.3);-webkit-box-shadow:0px 2px 2px rgba(0, 0, 0, 0.3);box-shadow:0px 2px 2px rgba(0, 0, 0, 0.3);margin-bottom:20px;}
 .store{margin-top:2em;text-align:center;}.store p{color:#999;}
+#footer{background-color:#333;padding:2em 0;margin-top:50px;border-top:5px solid rgba(0, 0, 0, 0.3);color:#AAA;}
