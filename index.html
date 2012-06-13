@@ -80,19 +80,7 @@
               <span><input type="checkbox" ng-model="transaction.active"></span>
               <input type="text" ng-model="transaction.name" placeholder="e.g. Bonus..." class="span3" />
               <input type="text" ng-model="transaction.amount" placeholder="Enter Amount" class="span1" />
-              <select class="span2" ng-model='transaction.month'>
-                <option value="1">{{getMonthLabel(1)}}</option>
-                <option value="2">{{getMonthLabel(2)}}</option>
-                <option value="3">{{getMonthLabel(3)}}</option>
-                <option value="4">{{getMonthLabel(4)}}</option>
-                <option value="5">{{getMonthLabel(5)}}</option>
-                <option value="6">{{getMonthLabel(6)}}</option>
-                <option value="7">{{getMonthLabel(7)}}</option>
-                <option value="8">{{getMonthLabel(8)}}</option>
-                <option value="9">{{getMonthLabel(9)}}</option>
-                <option value="10">{{getMonthLabel(10)}}</option>
-                <option value="11">{{getMonthLabel(11)}}</option>
-                <option value="12">{{getMonthLabel(12)}}</option>
+              <select class="span2" ng-model='transaction.month' ng-options="getMonthLabel(value) for value in [1,2,3,4,5,6,7,8,9,10,11,12]">
               </select>
               <a class="" ng-click="removeTransaction($index);"><i class="icon-minus-sign"></i></a>
             </li>
