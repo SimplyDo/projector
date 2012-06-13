@@ -1,0 +1,21 @@
+Balance Projector 
+
+Balance Projector can provide quick insights into your immediate financial future. The real time interface updates on every change and makes somewhat abstract numbers very tangible.
+
+url: http://simplydo.com/projector/
+sources: https://github.com/SimplyDo/projector
+
+Created by Simply Do: http://simplydo.com
+
+
+
+Uses various libraries / framework under their respective licenses: 
+
+AngularJS by Google - http://angularjs.org/
+Twitter Bootstrapped - http://twitter.github.com/bootstrap/
+
+
+
+Instructions: 
+
+Simply point a web server to the root directory of this repository and view in any modern browser. 
