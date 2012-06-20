@@ -73,7 +73,7 @@
 
         
         <div class="box">
-          <h2>What are your regular Expenses?</h2>
+          <h2>What are your regular expenses?</h2>
           <ul>
             <li ng-repeat="expense in expenses" class="active-{{expense.active}}">
               <span><input type="checkbox" ng-model="expense.active"></span>
@@ -94,7 +94,7 @@
 
         
         <div class="box">
-          <h2>Any non-Recurring Transactions?</h2>
+          <h2>Any non-Recurring transactions?</h2>
           <ul>
             <li ng-repeat="transaction in nonRecurring" class="active-{{transaction.active}}">
               <span><input type="checkbox" ng-model="transaction.active"></span>
@@ -123,7 +123,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th colspan="2" class="number">Accumulated Net Income</th>
+              <th colspan="2" class="number">Accumulated net income</th>
               <th class="number">Balance</th>
           </thead>
           <tbody>
@@ -140,7 +140,7 @@
             <tr>
               <th></th>
               <th class="number">Per month</th>
-              <th class="number">Per Year</th>
+              <th class="number">Per year</th>
           </thead>
           <tbody>
             <tr>
@@ -159,7 +159,7 @@
               <td class="number">{{tallyTransactions()}}</td>
             </tr>
             <tr>
-              <td><strong>Net Income</strong></td>
+              <td><strong>Net income</strong></td>
               <td class="number" ng-class="positiveNegative(monthlyNet())"><strong>{{roundDown(monthlyNet())}}</strong></td>
               <td class="number" ng-class="positiveNegative((monthlyNet()*12)+tallyTransactions())"><strong>{{roundDown(monthlyNet()*12)+tallyTransactions()}}</strong></td>
             </tr>
