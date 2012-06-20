@@ -108,7 +108,7 @@
           <button class="btn btn-indented" ng-click="addTransaction();"><i class="icon-plus"></i> Add</button>
         </div>
 
-        <div class="store">
+        <div class="store" ng-show="storageSupport">
           <p>
             <button class="btn btn-success" ng-click="save();"><i class="icon-hdd icon-white"></i> Save</button>
             <button class="btn btn-danger" ng-click="clear();"><i class="icon-trash icon-white"></i> Erase</button>

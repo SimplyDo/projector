@@ -13,6 +13,8 @@ function projectorCtrl($scope,Storage) {
 
   $scope.nonRecurring = Storage.loadObject('nonRecurring');
 
+  $scope.storageSupport = Storage.supported();
+
 
   $scope.save = function() {
     Storage.saveObject($scope.expenses,'expenses');
